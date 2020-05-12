@@ -8,6 +8,7 @@ class ThrowerDragon(Dragon):
     name = 'Thrower'
     implemented = True
     damage = 1
+    food_cost = 3
 
     # ADD/OVERRIDE CLASS ATTRIBUTES HERE
 
@@ -18,7 +19,12 @@ class ThrowerDragon(Dragon):
         This method returns None if there is no such Terminator (or none in range).
         """
         # BEGIN 1.3 and 2.1
-        return random_or_none(self.place.terminators)  # REPLACE THIS LINE
+        place = self.place
+        while place.entrance is not skynet:
+            if len(place.terminators) is not 0:
+                break
+            place = place.entrance
+        return random_or_none(place.terminators)  # REPLACE THIS LINE
         # END 1.3 and 2.1
 
     def throw_at(self, target):
